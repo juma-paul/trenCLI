@@ -1,4 +1,5 @@
 import axios from "axios";
+import * as cheerio from "cheerio";
 
 class RateLimiter {
   constructor(delayMs = 1000) {
@@ -29,6 +30,7 @@ export class WebScraper {
     this.retries = options.retries || 3;
   }
 
+  // Fetch a single page
   async fetchPage(url) {
     await this.rateLimiter.wait();
 
@@ -44,5 +46,27 @@ export class WebScraper {
         await new Promise((res) => setTimeout(res, 1000 * attempt));
       }
     }
+  }
+
+  extractData(html, extractors) {
+    const $ = cheerio.load(html);
+    const result = {};
+
+    for (const [key, rule] of Object.entries(extractors)) {
+      try {
+        if (rule.attr) {
+          result[key] = $(rule.selector).attr(rule.attr);
+        } else if (rule.multiple) {
+          result[key] = $(rule.selector)
+            .map((i, el) => $(el).text().trim())
+            .get();
+        } else {
+          result[key] = $(rule.selector).text().trim();
+        }
+      } catch {
+        result[key] = null;
+      }
+    }
+    return result;
   }
 }
