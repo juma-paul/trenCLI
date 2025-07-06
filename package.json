@@ -1,0 +1,21 @@
+{
+  "name": "trencli",
+  "version": "1.0.0",
+  "description": "A CLI tool for extracting data from websites",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juma-paul/trencli.git"
+  },
+  "keywords": ["web", "scraper", "cli", "data", "extraction", "deep"],
+  "author": "Juma R. Paul",
+  "license": "MIT",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/juma-paul/trencli/issues"
+  },
+  "homepage": "https://github.com/juma-paul/trencli#readme"
+}
