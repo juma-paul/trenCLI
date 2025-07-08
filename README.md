@@ -1,6 +1,6 @@
-# Trencli
+# TrenCLI
 
-Trencli is a command-line web scraper built with Node.js that balances simplicity and functionality.
+**TrenCLI** is a command-line web scraper built with Node.js that balances simplicity and functionality.
 It’s designed to be easy to understand, yet powerful enough to handle real-world scraping tasks — all from your terminal.
 
 Whether you're pulling data for research, automation, or just tinkering, Trencli gives you a clean, configurable, and respectful way to interact with the web.
