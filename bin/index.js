@@ -31,7 +31,16 @@ program
         urls = [options.url];
       } else if (options.file) {
         const fileContent = await fs.readFile(options.file, "utf-8");
-        urls = fileContent.split("\n").filter(Boolean);
+
+        // Check if it's a JSON file
+        if (options.file.endsWith(".json")) {
+          const config = JSON.parse(fileContent);
+          urls = config.urls || [];
+          extractors = config.extractors || extractors;
+        } else {
+          // Plain text file with URLs
+          urls = fileContent.split("\n").filter(Boolean);
+        }
       }
 
       if (urls.length === 0) {
