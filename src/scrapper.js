@@ -70,6 +70,17 @@ export class WebScraper {
       try {
         if (rule.attr) {
           result[key] = $(rule.selector).attr(rule.attr);
+        } else if (rule.multiple && rule.cells) {
+          // Special handling for table rows with cells
+          result[key] = $(rule.selector)
+            .map((i, row) => {
+              const cells = $(row)
+                .find("td, th")
+                .map((j, cell) => $(cell).text().trim())
+                .get();
+              return cells;
+            })
+            .get();
         } else if (rule.multiple) {
           result[key] = $(rule.selector)
             .map((i, el) => $(el).text().trim())
